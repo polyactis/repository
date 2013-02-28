@@ -1,0 +1,102 @@
+****  CURRENT RELEASE:  ****
+
+NEW OPTION:
+- More of a sub-option.  This is motivated by some simulations Lawrence Uricchio (grad student in the lab) has been doing under a recurrent hitchhiking model.  SFS_CODE now allows more flexibility for the mutation rate variation across loci.  You can now specify the mutation rate at a specific locus directly, rather than relying on SFS_CODE to draw the rate from a given distribution.
+  --rateClassLoci (-v) [L <locus> <rate>] [ [P <pop>] <n_classes> <alpha>]
+
+BUG FIXES:
+-There was a bug in the way male sex chromosomes were tracked after a population expansion.  This has been fixed.  Note that this bug only affects sex chromosomes in an expanding population, and does not impact contractions, migration, admixture, splitting, etc.
+
+-There was a bug in the way inbreeding was performed that led to infinite loops when the inbreeding rate was large.  This has been solved.
+
+
+****  PREVIOUS NOTES:  ****
+
+July 26, 2011
+
+BUG FIXES:
+
+When using the --trackTrajectory option with a non-trivial final frequency range, the ancestral sequence would not be printed.  This has been resolved, so the ancestral sequence will be printed.
+
+
+February 03, 2010
+
+--mutation option had a bug which lead to the mutation being introduced into a randomly chosen population.  This has been resolved.
+
+
+January 20, 2010
+
+Several new features!!
+1)  --admixture (-TJ)
+		You can now directly simulate admixture!  The options are extremely flexible, allowing for an arbitrary number of ancestral populations, differing representation of males and females from ancestral populations, etc.
+
+2)  --mutation
+		Introduce a new mutation at any time, with a user-specified selection coefficient!  
+		
+3)  --trackAncestry
+		This allows you to know the true genetic ancestry of individuals at every site when you are simulating with migration or admixture.  Very handy to know the exact widths and locations of each admixture block.
+		
+4)  --trackTrajectory
+		Follow the frequency trajectory of a mutation generation by generation.  This option can also be used to specify the final frequency of a derived allele at the time of sampling, and automatically restart the simulation if all the mutations you are tracking are fixed or lost.
+
+Updates:
+I have fixed the way that convertSFS_CODE creates ms-style output so that the output can be used directly with sample_stats (supplied with the ms download).
+
+
+
+August 28, 2009
+
+See documentation for details, but here is a brief description.
+* SFS_CODE now supports various equilibrium nucleotide frequencies using the --baseFreq (-q) flag (which can be set to change over time).  
+* When simulating CpGs using --substMod 3, there is now a separate parameter for the transition/transversion bias at CpG sites.
+* Added --substMod 6, which is the general time reversible (GTR) nucleotide substitution model.  This works in conjunction with --baseFreq.
+
+
+Bug fixes:  
+
+Previous version created a large file called rec.txt whenever recombination was used.  This was a bug checking file, which has been removed.
+
+
+May 13, 2009
+
+I have made minor updates, but they have come at the benefit of a considerable decrease in computation time.  As an example, the previous version took about 36 seconds to simulation 1MB in a population of size N=250.  The current version takes about 24.  For N=500, it took 90s, now it takes 61s.  I will update the table and figures on the performance tab of the webpage when I have time to run all those simulations.
+
+Happy Simulating!
+
+
+February 23, 2009
+
+There was a slight bug when simulating multiple populations.  Doh!
+
+I am currently implementing further structural variation options such as duplications and copy number variants, and will have another version available soon.
+
+
+
+February 19, 2009
+
+CHANGE TO RECOMBINATION FILE.  When specifying a recombination map, you no longer include the recombination rate on the first line.  Recombination (in all instances except when specifying a genetic distance between loci) is now governed by population scaled parameters (e.g., rho = 4Nr), whereas before when a recombination map was specified you had to input genetic distance in morgans.
+
+GENE CONVERSION.  The major addition to SFS_CODE is gene conversion (-H).  This involved completely revamping the way recombination works (but this was all internal, and no effect on usage except as noted for the recombination map file above).  The benefit to completely rewriting the way recombination worked is that in some instances the program is even faster now (the major drawback being months of coding/debugging).  The gene conversion option also allows for biased gene conversion, which will hopefully be welcomed by a number of users.
+
+CLUSTER SCRIPTS.  I have now included two scripts in the examples/ folder (makeTask.pl and runTask.sh) that can be used to generate a task list of simulations to run on a cluster.  See examples/readme for more details.
+
+BUG FIX.  convertSFS_CODE had a bug in the way it read the sfs_code output file when using multiple loci and using the `R' option to repeat a subset of lengths.
+
+
+
+September 19, 2008:
+
+I have now added inversions to the repertoire of options available to your sfs_code simulating pleasure.  I've also added a second distribution for indels, which make use of a Poisson distribution of lengths (enabling longer indels).  I've also fixed a bug the way sfs_code read the list of parameters when using the -TW option.  If -TW were used after another -T* flag, then you would get an error saying that the option was not yet implemented.  It has been solved.  I've also made some slight updates to the user's manual.  
+
+
+August 11, 2008:
+
+The previous versions had a bug when simulating exactly 2 loci with partial linkage (i.e. when using --linkage command such that the loci were neither independent nor completely linked).  The problem has been solved.  There are no known bugs in this program at the time of this release.
+
+July 1, 2008:
+
+Optimized how recombination events are distributed when simulating multiple loci.  In doing so, I found a bug that caused an excess of recombination events in the last locus (independent of how many loci were simulated).  This has been resolved, such that the distribution of recombination events are uniform when they are supposed to be.
+
+Based on some simple tests, I've updated the makefile to now optimize using -O3 -funroll-loops.  This option is not instantiated on the computers that I'm currently using (Mac Pro 2.8Ghz OS 10.5 or Linux AMD 2Ghz).  It seems to speed up the computation time fairly well.  
+
+I still highly recommend using -fast (if you have it, Linux does not jive with this optimization flag), but if you have a Apple G5 processor, you'd better use -fast -fno-fast-math to avoid any rounding errors that might creep up.

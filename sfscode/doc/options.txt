@@ -1,0 +1,163 @@
+	--mutation <time> [P <population>] [L <locus>] [S <site>] [G <gamma>]
+
+	--printGen
+	   print the generation throughout the simulation.  only useful for long simulations when the generations take a long time to run and you want status updates.
+	   
+	--trackAncestry [a] <file>
+		print the ancestry of each position simulated
+
+	--trackTrajectory [T <time>] [P <pop>] [L <locus>] [S <site>] [R <min_freq> <max_freq>] [A] [M <max_reps>] [F [a] <file>]
+		track the frequency each generation [A causes simulation to restart immediately after loss]
+
+-A  --noSeq
+		don't print ancestral sequence
+
+-a	--annotate    [F <filename>] [<a1> [<a2>...<aR>] [R]]
+		indicate whether each locus is coding/non-coding
+
+-B	--BURN  <burn>
+		set initial burn-in length, generations/P/N
+
+-b	--BURN2  <burn>
+		set burn-in length of subsequent iterations > 1
+
+-C	--PSI  [P <pop>] <psi>
+		set the CpG mutation bias
+
+-c	--constraint  [P <pop>] [L <locus>] <f0>
+		set the non-lethal mutation rate
+
+-TD  <t> <i> <j> <allele_freq> <N> [locus]
+		only used with -T to create a domesticated population
+
+-Td  <t> [P <pop>] <v>
+		only used with -T to set the demographic effects
+
+-TE  <t> [pop]
+		only used with -T to end the simulation for a population at time t
+
+-e	--errfile  [a] <file> 
+		print error to specific file
+
+-F	--popFreq  [a] <file>
+		create file with population & sample frequencies for each event
+		
+-f	--propFemale [P <pop>] <pf>
+		set the proportion of females in a population
+		
+-G	--GenEffect  <pop> <G>
+		set the generation effect for a population
+		
+-Tg  [P <pop>] <alpha>
+		only used with -T to set the exponential population growth rate
+
+-H	--geneConversion  [P <pop>] [B <BGC>] <f> <lambda> 
+		set parameters for gene conversion
+
+-h	--help 
+		help menu
+
+-I	--INF_SITES 
+		turn on infinite-sites model [only at single time!!]
+
+-i	--self  [P <pop>] <s>
+		set the selfing [not really inbreeding] rate
+
+-TJ  --admix <gen> <new_p> <size> <n_pop> <P_1>...<P_npop> [M <m_1>...<m_npop>] <f_1>...<f_npop>
+		create new population with specified size by joining <n_pops> existing populations
+
+-j	
+
+-K	--KAPPA  [P <pop>] <kappa> 
+		set transition transversion rate
+
+-Tk  [P <pop>] <K> <r>
+		used with -T to implement logistic growth rate
+		
+-L  --length  <nloci> <L1> [<L2>...<Ln>] [R]
+		set sequence lengths and number of loci
+
+-l	--linkage  <p/g> <d1> [<d2>...<dn-1>] [R]
+		set linkage between adjacent loci
+
+-M	--substMod  <mod> [args]
+		set the substitution model
+
+-m	--mig_mat {see documentation...}
+		set the migration rates to and from populations
+
+-N	--popSize  [P <pop>] <size>
+		set the effective size of a population
+
+-n	--sampSize  [P <pop>] <SS1> [<SS2>...<SSNpops>]
+		set the number of individuals sampled from a population
+
+-O
+
+-o	--outfile  [a] <file>
+		print output to specific file
+
+-P	--ploidy  <P>
+		set the ploidy, P=1 is haploid, P=2 is diploid, P=4 is tetraploid
+
+-p	--tetraType  <0/1>
+		set the type of tetraploid [allo- or auto-]
+
+-Q
+
+-q   --baseFreq [P <pop>] <pi_C> <pi_G> <pi_T> <pi_A>
+		set the equilibrium base frequencies (default = 0.25)
+
+-R	--ReportBurnFixed
+		report mutations that fixed during burn-in
+
+-r	--rho  [P <pop>] [F <filename>] <rho>
+		set the recombination rate for a population
+
+-TS  <t> <i> <j>
+		used with -T to split the population at a given time
+
+-s	--seed  <value>
+		set seed for random number generator
+
+-T*
+		used in combination with other parameters for timed effects
+
+-t	[P <pop>] <theta>
+		set the value of theta for a population
+		
+-U	--longIndel  [P <pop>] <INSrate> <DELrate> <mean_length>
+		rate of insertion/deletions with Poisson length distribution
+
+-u	--indel  [P <pop>] <INSrate> <DELrate> <mean_length> 
+		rate of insertion/deletions with geometric length distribution
+
+-V	--rateClassSites  [P <pop>] <nclasses> <alpha> 
+		mutation rate variation among SITES
+
+-v	--rateClassLoci  [P <pop>] <nclasses> <alpha>
+		mutation rate variation among LOCI
+
+-W	--selDistType  [P <pop>] [L <locus>] <type> [args] 
+		set distribution of selective effects (often denoted w in pop.gen. literature)
+
+-w	--neutPop  <pop>
+		allow a population to be neutral
+
+-X
+
+-x	--sex  <x1> [<x2 >..<xR>] [R]
+		indicate whether each locus is autosomal/sex
+
+-Y	--pMaleRec  [P <pop>] <p>
+		proportion of recombinants occuring in male meioses vs female.
+
+-y	--pMaleMig  [P <pop>] <pmale>
+		proportion of migrants that are male
+
+-Z	--additive 
+		specify an additive model of selective effects instead of multiplicative
+
+-z	--inversions  [P <pop>] <INVrate> <mean_length>
+		rate of inversions with Poisson length distribution	
+
