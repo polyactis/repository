@@ -1,0 +1,8 @@
+The following binary programs are for 64-bit Linux OS with kernel version older than 2.6.24
+
+1) 454 read simulation
+	art_454_old_kernel
+
+2) illumina read simulation
+	art_illumina_old_kernel
+
